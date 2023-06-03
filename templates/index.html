@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Aplicación de análisis de texto en japonés</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div id="app">
+        <h1>Aplicación de análisis de texto en japonés</h1>
+        <form action="/app" method="post">
+            <textarea id="textarea" name="text" rows="10" cols="50" v-model="defaultText"></textarea><br>
+            <input v-on:click="sendRequest()" type="button" value="Procesar">
+        </form>
+        <div id="resultado">
+            <span v-for="word in words" class="word-container" v-bind:class="{ 'new-line': word === '\n' }" :key="word">
+                {{'{{word}}'}}
+            </span>
+        </div>
+    </div>
+    
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    defaultText: "このカードの第1話に流れたOPの曲名は何？",
+                    words: ['この', 'カード', 'の', '第', '1', '話', 'に', '流れ', 'た', 'OP', 'の', '曲名', 'は', '何', '？', '\n', 'おはよう', '！', '\n', '今日', 'は', '本当は', 'すう', 'ちゃんと', 'コラボ', 'の', '予定', 'だっ', 'た', 'ん', 'だ', 'けど', '、', 'また', '別', '日', 'に', 'さ', 'せ', 'て', 'いただく', 'こと', 'に', 'なり', 'まし', 'た', '！', '\n', '楽しみ', 'に', 'し', 'て', 'もらえる', 'と', '嬉しい', '🥺💗', '\n', '明日', 'も', '配信', 'お', '休み', 'じ', 'ゃけぇ', '💡', 'こ の', 'アーカイブ', 'で', '気持ち良く', 'なっ', 'て', 'もろ', 'て', '💖', '✨', '聴く', '時', 'に', '高', '評価', ' ボタン', 'を', '押し', 'たり', 'コメント', '書い', 'たり', 'も', 'たくさん', 'し', 'て', 'くれる', 'と', '嬉しい', '〜', '💕💕💕', '\n', 'Kerakyatan', 'yang', 'dipimpin', 'oleh', 'hikmat', 'kebijaksanaan', 'dalam', 'permusyawaratan', 'perwakilan', '.', '\n', 'Sekarang', 'apa', 'lambang', 'dari', 'sila', 'tersebut', '?', '\n', 'Ayo', 'jam', '20', '.', '00', 'WIB', '(', 'GMT', '+', '7', ')', 'aku', 'akan', 'live', 'karaoke', 'di', 'instagram', 'yang', 'baru', 'saja', 'aku', 'hack', '😎']
+                }
+            },
+            methods: {
+                sendRequest(){
+                    const data = { 'text': this.defaultText };
+                
+                    fetch('/process', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(data)
+                    })
+                    .then(response => response.json())
+                    .then(result => {
+                        result = result.data
+                        //this.words = this.words.concat(result.words)
+                        this.words = result.words
+                    })
+                    .catch(error => {
+                        console.log("Error");
+                        console.error(error);
+                    });
+                }
+            }
+          })
+        
+         app.mount('#app')
+    </script>
+</body>
+</html>

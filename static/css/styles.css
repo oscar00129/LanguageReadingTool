@@ -1,0 +1,30 @@
+html, body{
+    padding: 0;
+    margin: 0;
+    font-size: 1rem;
+}
+
+#resultado {
+    margin-top: 1rem;
+}
+
+.word-container {
+    background-color: black;
+    color: white;
+    margin-right: .2rem;
+    padding: .5rem;
+    border-radius: 10%;
+    transition: ease;
+    transition-duration: .2s;
+    display: inline-block;
+    margin-bottom: .2rem;
+}
+
+.word-container:hover{
+    font-size: 1.5rem;
+}
+
+.new-line {
+    display: block;
+    background-color: initial;
+}
