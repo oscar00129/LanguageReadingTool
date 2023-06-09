@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Aplicación de análisis de texto en japonés</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div id="app">
+        <h1>Aplicación de análisis de texto en japonés</h1>
+        <form action="/loginBackend" method="post" class="form">
+            <input type="text" name="txtUser" id="txtUser">
+            <input type="password" name="txtPass" id="txtPass">
+            <!--
+            <div class="checkbox-container">
+                <input type="checkbox" name="cbRemember" id="cbRemember">
+                <label for="cbRemember" id="lbRemember">Remember me</label>
+            </div>
+            -->
+            <button type="submit">Login</button>
+        </form>
+    </div>
+    
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {}
+            },
+            methods: {}
+          })
+        
+         app.mount('#app')
+    </script>
+</body>
+</html>

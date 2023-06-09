@@ -20,7 +20,7 @@ html, body{
     margin-bottom: .2rem;
 }
 
-.word-container:hover{
+.word-container:hover {
     font-size: 1.5rem;
 }
 
@@ -28,3 +28,29 @@ html, body{
     display: block;
     background-color: initial;
 }
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .form * {
+    display: block;
+    margin-bottom: 1rem;
+    padding: .5rem 1rem .5rem 1rem;
+  }
+  
+  .form .checkbox-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  #cbRemember {
+    margin-right: 1rem; /* Espacio entre el checkbox y el label */
+  }
+  
+  #lbRemember {
+    cursor: pointer;
+  }

@@ -8,6 +8,24 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
+@app.route('/login')
+def login():
+    return render_template('login.html')
+
+@app.route('/loginBackend', methods=['POST'])
+def loginBackend():
+    txtUser = request.form['txtUser']
+    txtPass = request.form['txtPass']
+    cbRemember = request.form.get('cbRemember')
+
+    return json.dumps({ 
+        'data': {
+            'user': txtUser,
+            'password': txtPass,
+            'remember': cbRemember
+        } 
+    })
+
 @app.route('/process', methods=['POST'])
 def process():
     text = request.get_json()['text']
