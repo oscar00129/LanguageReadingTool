@@ -8,8 +8,8 @@
     <div id="app">
         <h1>Aplicación de análisis de texto en japonés</h1>
         <form action="/loginBackend" method="post" class="form">
-            <input type="text" name="txtUser" id="txtUser">
-            <input type="password" name="txtPass" id="txtPass">
+            <input type="text" name="txtUser" id="txtUser" v-model="user">
+            <input type="password" name="txtPass" id="txtPass" v-model="password">
             <!--
             <div class="checkbox-container">
                 <input type="checkbox" name="cbRemember" id="cbRemember">
@@ -24,7 +24,10 @@
     <script>
         const app = Vue.createApp({
             data() {
-                return {}
+                return {
+                    user: '',
+                    password: ''
+                }
             },
             methods: {}
           })
