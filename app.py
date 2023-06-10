@@ -10,17 +10,18 @@ app.secret_key = 'secret_key_example_language'
 def index():
     logged_user = session.get('logged_user')
     if logged_user:
-        return render_template('index.html')
+        return render_template('index.html', logged_user=logged_user)
     else:
         return redirect(url_for('login'))
 
-@app.route('/login')
+@app.route('/login', methods=['GET', 'POST'])
 def login():
+    error = request.args.get('error')
     logged_user = session.get('logged_user')
     if logged_user:
         return redirect(url_for('index'))
     else: 
-        return render_template('login.html')
+        return render_template('login.html', error=error)
 
 @app.route('/loginBackend', methods=['POST'])
 def loginBackend():
@@ -48,8 +49,12 @@ def loginBackend():
         session['logged_user'] = txtUser
         return redirect(url_for('index'))
     else:
-        # TODO: Add wrong login fuctions
-        return redirect(url_for('login'))
+        return redirect(url_for('login', error=True))
+
+@app.route('/logout')
+def logout():
+    session.pop('logged_user', None)
+    return redirect(url_for('index'))
 
 @app.route('/process', methods=['POST'])
 def process():

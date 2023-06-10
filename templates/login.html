@@ -8,14 +8,17 @@
     <div id="app">
         <h1>Aplicación de análisis de texto en japonés</h1>
         <form action="/loginBackend" method="post" class="form">
-            <input type="text" name="txtUser" id="txtUser" v-model="user">
-            <input type="password" name="txtPass" id="txtPass" v-model="password">
+            <input type="text" name="txtUser" id="txtUser" v-model="user" placeholder="Email" required>
+            <input type="password" name="txtPass" id="txtPass" v-model="password" placeholder="Password" required>
             <!--
             <div class="checkbox-container">
                 <input type="checkbox" name="cbRemember" id="cbRemember">
                 <label for="cbRemember" id="lbRemember">Remember me</label>
             </div>
             -->
+            {% if error %}
+                <p class="error-message">Error in credentials!</p>
+            {% endif %}
             <button type="submit">Login</button>
         </form>
     </div>
@@ -25,8 +28,8 @@
         const app = Vue.createApp({
             data() {
                 return {
-                    user: '',
-                    password: ''
+                    user: "",
+                    password: ""
                 }
             },
             methods: {}
