@@ -16,7 +16,11 @@ def index():
 
 @app.route('/login')
 def login():
-    return render_template('login.html')
+    logged_user = session.get('logged_user')
+    if logged_user:
+        return redirect(url_for('index'))
+    else: 
+        return render_template('login.html')
 
 @app.route('/loginBackend', methods=['POST'])
 def loginBackend():
