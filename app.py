@@ -2,9 +2,18 @@ from flask import Flask, render_template, request, session, redirect, url_for
 from janome.tokenizer import Tokenizer
 import json
 import mysql.connector
+from configparser import ConfigParser
 
 app = Flask(__name__)
 app.secret_key = 'secret_key_example_language'
+
+def readConfig(category, attribute, is_int = False):
+    config = ConfigParser()
+    config.read('config.ini')
+    if is_int:
+        return config.getint(category, attribute)
+    else:
+        return config[category][attribute]
 
 @app.route('/')
 def index():
@@ -30,11 +39,11 @@ def loginBackend():
     #cbRemember = request.form.get('cbRemember')
 
     cn = mysql.connector.connect(
-        host="127.0.0.1",
-        port="3306",
-        user="root",
-        password="",
-        database="language"
+        host=readConfig('DATABASE', 'HOST'),
+        port=readConfig('DATABASE', 'PORT', True),
+        user=readConfig('DATABASE', 'USER'),
+        password=readConfig('DATABASE', 'PASSWORD'),
+        database=readConfig('DATABASE', 'DATABASE')
     )
     cursor = cn.cursor()
     # Consulta segura con parámetros de consulta
