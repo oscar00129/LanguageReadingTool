@@ -1,19 +1,12 @@
 from flask import Flask, render_template, request, session, redirect, url_for
 from janome.tokenizer import Tokenizer
 import json
-import mysql.connector
-from configparser import ConfigParser
+from routes import auth_routes
 
 app = Flask(__name__)
 app.secret_key = 'secret_key_example_language'
 
-def readConfig(category, attribute, is_int = False):
-    config = ConfigParser()
-    config.read('config.ini')
-    if is_int:
-        return config.getint(category, attribute)
-    else:
-        return config[category][attribute]
+app.register_blueprint(auth_routes.auth_bp)
 
 @app.route('/')
 def index():
@@ -21,49 +14,7 @@ def index():
     if logged_user:
         return render_template('index.html', logged_user=logged_user)
     else:
-        return redirect(url_for('login'))
-
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    error = request.args.get('error')
-    logged_user = session.get('logged_user')
-    if logged_user:
-        return redirect(url_for('index'))
-    else: 
-        return render_template('login.html', error=error)
-
-@app.route('/loginBackend', methods=['POST'])
-def loginBackend():
-    txtUser = request.form['txtUser']
-    txtPass = request.form['txtPass']
-    #cbRemember = request.form.get('cbRemember')
-
-    cn = mysql.connector.connect(
-        host=readConfig('DATABASE', 'HOST'),
-        port=readConfig('DATABASE', 'PORT', True),
-        user=readConfig('DATABASE', 'USER'),
-        password=readConfig('DATABASE', 'PASSWORD'),
-        database=readConfig('DATABASE', 'DATABASE')
-    )
-    cursor = cn.cursor()
-    # Consulta segura con parámetros de consulta
-    query = "SELECT * FROM users WHERE email = %s AND password = %s"
-    params = (txtUser, txtPass)
-    cursor.execute(query, params)
-    results = cursor.fetchall()
-    cursor.close()
-    cn.close()
-
-    if len(results) > 0:
-        session['logged_user'] = txtUser
-        return redirect(url_for('index'))
-    else:
-        return redirect(url_for('login', error=True))
-
-@app.route('/logout')
-def logout():
-    session.pop('logged_user', None)
-    return redirect(url_for('index'))
+        return redirect(url_for('auth.login'))
 
 @app.route('/process', methods=['POST'])
 def process():
