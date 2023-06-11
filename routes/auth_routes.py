@@ -13,20 +13,18 @@ def readConfig(category, attribute, is_int = False):
     else:
         return config[category][attribute]
 
-@auth_bp.route('/login', methods=['GET', 'POST'])
+@auth_bp.route('/login')
 def login():
-    error = request.args.get('error')
     logged_user = session.get('logged_user')
     if logged_user:
         return redirect(url_for('index'))
     else: 
-        return render_template('login.html', error=error)
+        return render_template('login.html')
 
 @auth_bp.route('/loginBackend', methods=['POST'])
 def loginBackend():
-    txtUser = request.form['txtUser']
-    txtPass = request.form['txtPass']
-    #cbRemember = request.form.get('cbRemember')
+    txtUser = request.get_json()['txtUser']
+    txtPass = request.get_json()['txtPass']
 
     cn = mysql.connector.connect(
         host=readConfig('DATABASE', 'HOST'),
@@ -46,9 +44,9 @@ def loginBackend():
 
     if len(results) > 0:
         session['logged_user'] = txtUser
-        return redirect(url_for('index'))
+        return json.dumps({ 'success': 'Login success.' })
     else:
-        return redirect(url_for('auth.login', error=True))
+        return json.dumps({ 'error': 'Error in credentials!' })
 
 @auth_bp.route('/logout')
 def logout():
