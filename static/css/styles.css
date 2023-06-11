@@ -34,30 +34,30 @@ html, body{
     flex-direction: column;
     align-items: center;
     justify-content: center;
-  }
-  
-  .form * {
+}
+
+.form * {
     display: block;
     margin-bottom: 1rem;
     padding: .5rem 1rem .5rem 1rem;
-  }
-  
-  .form .checkbox-container {
+}
+
+.form .checkbox-container {
     display: flex;
     align-items: center;
-  }
-  
-  #cbRemember {
-    margin-right: 1rem; /* Espacio entre el checkbox y el label */
-  }
-  
-  #lbRemember {
-    cursor: pointer;
-  }
+}
 
-  .error-message {
+#cbRemember {
+    margin-right: 1rem; /* Espacio entre el checkbox y el label */
+}
+
+#lbRemember {
+    cursor: pointer;
+}
+
+.error-message {
     color: red;
     margin: 0;
     padding: 0;
     margin-bottom: 1rem;
-  }
+}
