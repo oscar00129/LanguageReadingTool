@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Aplicación de análisis de texto en japonés</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div id="app">
+        <h1>Aplicación de análisis de texto en japonés</h1>
+        <form class="form" @submit="validateForm">
+            <input type="text" name="txtUser" id="txtUser" v-model="user" placeholder="Email" required>
+            <input type="password" name="txtPass" id="txtPass" v-model="password" placeholder="Password" required>
+            <input type="password" name="txtConfirmPass" id="txtConfirmPass" v-model="confirmPassword" placeholder="Confirm Password" required>
+            <p class="error-message">{{'{{error}}'}}</p>
+            <button type="submit">Register</button>
+            <a href="/login">Log in here</a>
+        </form>
+    </div>
+    
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios"></script>
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    user: "",
+                    password: "",
+                    confirmPassword: "",
+                    error: ""
+                }
+            },
+            methods: {
+                validateForm(event) {
+                    if (this.password !== this.confirmPassword) {
+                        this.error = "Passwords do not match."
+                    }else{
+                        this.sendRequest();
+                    }
+                    event.preventDefault(); // Evita el envío del formulario
+                },
+                sendRequest() {
+                    axios.post("/registerBackend", {
+                            "txtUser": this.user,
+                            "txtPass": this.password
+                        })
+                        .then(response => {
+                            if(response.data.error){
+                                this.error = response.data.error;
+                            }else if(response.data.success){
+                                window.location.href = '/login';
+                            }
+                        })
+                        .catch(error => {
+                            console.error(error);
+                        });
+                }
+            }
+          })
+        
+         app.mount('#app')
+    </script>
+</body>
+</html>
