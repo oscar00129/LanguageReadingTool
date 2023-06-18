@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, session, redirect, url_for
+from flask import Blueprint, render_template, request, session, redirect, url_for, jsonify
 import mysql.connector
 from configparser import ConfigParser
 import json
@@ -13,13 +13,21 @@ def readConfig(category, attribute, is_int = False):
     else:
         return config[category][attribute]
 
+def getLanguageData(language_config):
+    with open('language_texts.json') as json_file:
+        data = json.load(json_file)
+        local_language_data = list(filter(lambda language: language['language'] == language_config, data['languages']))
+        return local_language_data[0] or {}
+
 @auth_bp.route('/login')
 def login():
     logged_user = session.get('logged_user')
     if logged_user:
         return redirect(url_for('index'))
-    else: 
-        return render_template('login.html')
+    else:
+        language = readConfig('APP', 'LANGUAGE')
+        data = getLanguageData(language)
+        return render_template('login.html', data = data)
 
 @auth_bp.route('/loginBackend', methods=['POST'])
 def loginBackend():
@@ -27,11 +35,11 @@ def loginBackend():
     txtPass = request.get_json()['txtPass']
 
     cn = mysql.connector.connect(
-        host=readConfig('DATABASE', 'HOST'),
-        port=readConfig('DATABASE', 'PORT', True),
-        user=readConfig('DATABASE', 'USER'),
-        password=readConfig('DATABASE', 'PASSWORD'),
-        database=readConfig('DATABASE', 'DATABASE')
+        host = readConfig('DATABASE', 'HOST'),
+        port = readConfig('DATABASE', 'PORT', True),
+        user = readConfig('DATABASE', 'USER'),
+        password = readConfig('DATABASE', 'PASSWORD'),
+        database = readConfig('DATABASE', 'DATABASE')
     )
     cursor = cn.cursor()
     # Consulta segura con parámetros de consulta
@@ -42,11 +50,13 @@ def loginBackend():
     cursor.close()
     cn.close()
 
+    language = readConfig('APP', 'LANGUAGE')
+    data = getLanguageData(language)
     if len(results) > 0:
         session['logged_user'] = txtUser
-        return json.dumps({ 'success': 'Login success.' })
+        return json.dumps({ 'success': data['login_data']['messages']['login_success'] })
     else:
-        return json.dumps({ 'error': 'Error in credentials!' })
+        return json.dumps({ 'error': data['login_data']['messages']['error_credentials'] })
 
 @auth_bp.route('/logout')
 def logout():
@@ -67,11 +77,11 @@ def registerBackend():
     txtPass = request.get_json()['txtPass']
 
     cn = mysql.connector.connect(
-        host=readConfig('DATABASE', 'HOST'),
-        port=readConfig('DATABASE', 'PORT', True),
-        user=readConfig('DATABASE', 'USER'),
-        password=readConfig('DATABASE', 'PASSWORD'),
-        database=readConfig('DATABASE', 'DATABASE')
+        host = readConfig('DATABASE', 'HOST'),
+        port = readConfig('DATABASE', 'PORT', True),
+        user = readConfig('DATABASE', 'USER'),
+        password = readConfig('DATABASE', 'PASSWORD'),
+        database = readConfig('DATABASE', 'DATABASE')
     )
     cursor = cn.cursor()
     # Comprobar email unico

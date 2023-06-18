@@ -1,0 +1,66 @@
+{
+    "languages": [{
+        "language": "english",
+        "app_name": "Language App",
+        "author": "Oscar00129",
+        "login_data": {
+            "email": "Email",
+            "password": "Password",
+            "login": "Login",
+            "register": "Register here",
+            "messages": {
+                "login_success": "Login success.",
+                "error_credentials": "Error in credentials!"
+            }
+        },
+        "register_data": {
+            "email": "Email",
+            "password": "Password",
+            "confir_password": "Confirm Password",
+            "register": "Register",
+            "login": "Log in here"
+        }
+    }, {
+        "language": "spanish",
+        "app_name": "Aplicación de análisis de texto en japonés",
+        "author": "Oscar00129",
+        "login_data": {
+            "email": "Correo Electrónico",
+            "password": "Contraseña",
+            "login": "Iniciar Sesión",
+            "register": "Registrate aquí",
+            "messages": {
+                "login_success": "Inicio de sesión exitoso.",
+                "error_credentials": "Error en las credenciales!"
+            }
+        },
+        "register_data": {
+            "email": "Correo Electrónico",
+            "password": "Contraseña",
+            "confir_password": "Confirma la Contraseña",
+            "register": "Registrarse",
+            "login": "Inicia sesión aquí"
+        }
+    }, {
+        "language": "japanese",
+        "app_name": "語学勉強アプリ",
+        "author": "Oscar00129",
+        "login_data": {
+            "email": "メールアドレス",
+            "password": "パスワード",
+            "login": "ログイン",
+            "register": "登録ページ",
+            "messages": {
+                "login_success": "ログイン成功",
+                "error_credentials": "パスワードが正しくありません"
+            }
+        },
+        "register_data": {
+            "email": "メールアドレス",
+            "password": "パスワード",
+            "confir_password": "パスワードもう一度",
+            "register": "登録",
+            "login": "キャンセル"
+        }
+    }]
+}

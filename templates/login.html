@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Aplicación de análisis de texto en japonés</title>
+    <title>{{data.app_name}}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
     <div id="app">
-        <h1>Aplicación de análisis de texto en japonés</h1>
+        {% with data=data %}
+            {% include "components/banner.html" %}
+        {% endwith %}
+        
         <form class="form" @submit="submitForm">
-            <input type="text" name="txtUser" id="txtUser" v-model="user" placeholder="Email" required>
-            <input type="password" name="txtPass" id="txtPass" v-model="password" placeholder="Password" required>
+            <input type="text" name="txtUser" id="txtUser" v-model="user" placeholder="{{data.login_data.email}}" required>
+            <input type="password" name="txtPass" id="txtPass" v-model="password" placeholder="{{data.login_data.password}}" required>
             <p class="error-message">{{'{{error}}'}}</p>
-            <button type="submit">Login</button>
-            <a href="/register">Register here</a>
+            <button type="submit">{{data.login_data.login}}</button>
+            <a href="/register">{{data.login_data.register}}</a>
         </form>
     </div>
     
