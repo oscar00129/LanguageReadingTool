@@ -9,7 +9,7 @@
         {% with data=data %}
             {% include "components/banner.html" %}
         {% endwith %}
-        <form action="/app" method="post">
+        <form>
             <textarea id="textarea" name="text" rows="10" cols="50" v-model="defaultText"></textarea><br>
             <input v-on:click="sendRequest()" type="button" value="Procesar">
         </form>
@@ -26,14 +26,18 @@
             data() {
                 return {
                     defaultText: "このカードの第1話に流れたOPの曲名は何？",
-                    words: ['この', 'カード', 'の', '第', '1', '話', 'に', '流れ', 'た', 'OP', 'の', '曲名', 'は', '何', '？', '\n', 'おはよう', '！', '\n', '今日', 'は', '本当は', 'すう', 'ちゃんと', 'コラボ', 'の', '予定', 'だっ', 'た', 'ん', 'だ', 'けど', '、', 'また', '別', '日', 'に', 'さ', 'せ', 'て', 'いただく', 'こと', 'に', 'なり', 'まし', 'た', '！', '\n', '楽しみ', 'に', 'し', 'て', 'もらえる', 'と', '嬉しい', '🥺💗', '\n', '明日', 'も', '配信', 'お', '休み', 'じ', 'ゃけぇ', '💡', 'こ の', 'アーカイブ', 'で', '気持ち良く', 'なっ', 'て', 'もろ', 'て', '💖', '✨', '聴く', '時', 'に', '高', '評価', ' ボタン', 'を', '押し', 'たり', 'コメント', '書い', 'たり', 'も', 'たくさん', 'し', 'て', 'くれる', 'と', '嬉しい', '〜', '💕💕💕', '\n', 'Kerakyatan', 'yang', 'dipimpin', 'oleh', 'hikmat', 'kebijaksanaan', 'dalam', 'permusyawaratan', 'perwakilan', '.', '\n', 'Sekarang', 'apa', 'lambang', 'dari', 'sila', 'tersebut', '?', '\n', 'Ayo', 'jam', '20', '.', '00', 'WIB', '(', 'GMT', '+', '7', ')', 'aku', 'akan', 'live', 'karaoke', 'di', 'instagram', 'yang', 'baru', 'saja', 'aku', 'hack', '😎']
+                    words: []
                 }
             },
             methods: {
                 sendRequest(){
-                    const data = { 'text': this.defaultText };
+                    const data = {
+                        'data': {
+                            'text': this.defaultText
+                        }
+                    };
                 
-                    fetch('/process', {
+                    fetch('/nagisa', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
