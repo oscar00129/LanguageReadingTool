@@ -68,8 +68,10 @@ def register():
     logged_user = session.get('logged_user')
     if logged_user:
         return redirect(url_for('index'))
-    else: 
-        return render_template('register.html')
+    else:
+        language = readConfig('APP', 'LANGUAGE')
+        data = getLanguageData(language)
+        return render_template('register.html', data = data)
 
 @auth_bp.route('/registerBackend', methods=['POST'])
 def registerBackend():
@@ -89,8 +91,10 @@ def registerBackend():
     params = (txtUser,)
     cursor.execute(query, params)
     results = cursor.fetchall()
+    language = readConfig('APP', 'LANGUAGE')
+    data = getLanguageData(language)
     if len(results) > 0:
-        return json.dumps({ 'error': 'Email is already registered.' })
+        return json.dumps({ 'error': data['register_data']['messages']['email_already_registered'] })
     
     # Registro
     query = "INSERT INTO users (email, password) VALUES (%s, %s);"
@@ -101,9 +105,9 @@ def registerBackend():
         cursor.close()
         cn.close()
         # El registro fue exitoso
-        return json.dumps({ 'success': 'Email has been registered successfully.' })
+        return json.dumps({ 'success': data['register_data']['messages']['email_registered_successfully'] })
     else:
         cursor.close()
         cn.close()
         # El registro falló
-        return json.dumps({ 'error': 'There was a problem with request, try again later.' })
+        return json.dumps({ 'error': data['register_data']['messages']['problem'] })

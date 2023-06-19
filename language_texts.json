@@ -16,9 +16,14 @@
         "register_data": {
             "email": "Email",
             "password": "Password",
-            "confir_password": "Confirm Password",
+            "confirm_password": "Confirm Password",
             "register": "Register",
-            "login": "Log in here"
+            "login": "Log in here",
+            "messages": {
+                "email_already_registered": "Email is already registered.",
+                "email_registered_successfully": "Email has been registered successfully.",
+                "problem": "There was a problem with request, try again later."
+            }
         }
     }, {
         "language": "spanish",
@@ -37,9 +42,14 @@
         "register_data": {
             "email": "Correo Electrónico",
             "password": "Contraseña",
-            "confir_password": "Confirma la Contraseña",
+            "confirm_password": "Confirma la Contraseña",
             "register": "Registrarse",
-            "login": "Inicia sesión aquí"
+            "login": "Inicia sesión aquí",
+            "messages": {
+                "email_already_registered": "El correo electrónico ya está registrado.",
+                "email_registered_successfully": "El correo electrónico ha sido registrado correctamente.",
+                "problem": "Hubo un problema con su solicitud, intente de nuevo más tarde."
+            }
         }
     }, {
         "language": "japanese",
@@ -58,9 +68,14 @@
         "register_data": {
             "email": "メールアドレス",
             "password": "パスワード",
-            "confir_password": "パスワードもう一度",
+            "confirm_password": "パスワードもう一度",
             "register": "登録",
-            "login": "キャンセル"
+            "login": "キャンセル",
+            "messages": {
+                "email_already_registered": "メールアドレスは既に登録されています。 ",
+                "email_registered_successfully": "メールアドレスは正常に登録されました。",
+                "problem": "申し訳ありませんが、ご要求に問題が発生しました。後でもう一度お試しください。"
+            }
         }
     }]
 }
