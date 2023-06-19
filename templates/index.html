@@ -6,8 +6,9 @@
 </head>
 <body>
     <div id="app">
-        <h1>Aplicación de análisis de texto en japonés</h1>
-        <p>Welcome {{ logged_user }}! <a href="/logout">Logout</a></p>
+        {% with data=data %}
+            {% include "components/banner.html" %}
+        {% endwith %}
         <form action="/app" method="post">
             <textarea id="textarea" name="text" rows="10" cols="50" v-model="defaultText"></textarea><br>
             <input v-on:click="sendRequest()" type="button" value="Procesar">

@@ -12,7 +12,10 @@ app.register_blueprint(auth_routes.auth_bp)
 def index():
     logged_user = session.get('logged_user')
     if logged_user:
-        return render_template('index.html', logged_user=logged_user)
+        language = auth_routes.readConfig('APP', 'LANGUAGE')
+        data = auth_routes.getLanguageData(language)
+        data['logged_user'] = logged_user
+        return render_template('index.html', data=data)
     else:
         return redirect(url_for('auth.login'))
 
