@@ -4,6 +4,10 @@ html, body{
     font-size: 1rem;
 }
 
+.p2 {
+    padding: 2rem;
+}
+
 #resultado {
     margin-top: 1rem;
 }
@@ -75,4 +79,125 @@ html, body{
 
 .header * {
     vertical-align: middle;
+}
+
+.btn-green{
+    color: white;
+    background-color: green;
+    padding: .75rem;
+    border-radius: .5rem;
+    font-weight: bold;
+    border-style: none;
+    cursor: pointer;
+}
+
+.btn-green:active {
+    background-color: darkgreen;
+}
+
+.texts-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.texts-container a{
+    text-decoration: none;
+    color: black;
+}
+
+.texts-container a:active{
+    color: red;
+}
+
+.text-info-container {
+    background-color: gainsboro;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border-radius: 1rem;
+    box-shadow: .5rem .5rem 1rem rgba(7, 16, 48, 0.4);
+    min-width: 28rem;
+    max-width: 28rem;
+    width: 28rem;
+
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.text-info-container img{
+    width: 100%;
+    border-radius: 1rem;
+    max-height: 20.95rem;
+}
+
+.img {
+    width: 100%;
+    height: 20.95rem;
+    background-color: aliceblue;
+    border-radius: 1rem;
+    color: white;
+    font-size: 14rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.text-info-container h4 {
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.text-stats {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+    padding: 0;
+}
+
+.word-unknown {
+    padding: .2rem;
+    background-color: red;
+    color: white;
+    border-radius: .2rem;
+}
+
+.word-learning {
+    padding: .2rem;
+    background-color: green;
+    color: white;
+    border-radius: .2rem;
+}
+
+.word-learned {
+    padding: .2rem;
+    background-color: blue;
+    color: white;
+    border-radius: .2rem;
+}
+
+.word-total {
+    padding: .2rem;
+    background-color: darkslategray;
+    color: white;
+    border-radius: .2rem;
+}
+
+.splitted-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.text-container {
+    background-color: aquamarine;
+}
+
+.stats-container {
+    background-color: blueviolet;
+    min-width: 10rem
 }

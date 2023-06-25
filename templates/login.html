@@ -11,11 +11,11 @@
         {% endwith %}
         
         <form class="form" @submit="submitForm">
-            <input type="text" name="txtUser" id="txtUser" v-model="user" placeholder="{{data.login_data.email}}" required>
-            <input type="password" name="txtPass" id="txtPass" v-model="password" placeholder="{{data.login_data.password}}" required>
+            <input type="text" name="txtUser" id="txtUser" v-model="user" placeholder="{{data.language_data.login_data.email}}" required>
+            <input type="password" name="txtPass" id="txtPass" v-model="password" placeholder="{{data.language_data.login_data.password}}" required>
             <p class="error-message">{{'{{error}}'}}</p>
-            <button type="submit">{{data.login_data.login}}</button>
-            <a href="/register">{{data.login_data.register}}</a>
+            <button type="submit">{{data.language_data.login_data.login}}</button>
+            <a href="/register">{{data.language_data.login_data.register}}</a>
         </form>
     </div>
     
@@ -40,7 +40,7 @@
                         if(response.data.error){
                             this.error = response.data.error;
                         }else if(response.data.success){
-                            window.location.href = '/';
+                            window.location.href = '/texts';
                         }
                     })
                     .catch(error => {

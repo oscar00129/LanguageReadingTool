@@ -10,12 +10,12 @@
             {% include "components/banner.html" %}
         {% endwith %}
         <form class="form" @submit="validateForm">
-            <input type="text" name="txtUser" id="txtUser" v-model="user" placeholder="{{data.register_data.email}}" required>
-            <input type="password" name="txtPass" id="txtPass" v-model="password" placeholder="{{data.register_data.password}}" required>
-            <input type="password" name="txtConfirmPass" id="txtConfirmPass" v-model="confirmPassword" placeholder="{{data.register_data.confirm_password}}" required>
+            <input type="text" name="txtUser" id="txtUser" v-model="user" placeholder="{{data.language_data.register_data.email}}" required>
+            <input type="password" name="txtPass" id="txtPass" v-model="password" placeholder="{{data.language_data.register_data.password}}" required>
+            <input type="password" name="txtConfirmPass" id="txtConfirmPass" v-model="confirmPassword" placeholder="{{data.language_data.register_data.confirm_password}}" required>
             <p class="error-message">{{'{{error}}'}}</p>
-            <button type="submit">{{data.register_data.register}}</button>
-            <a href="/login">{{data.register_data.login}}</a>
+            <button type="submit">{{data.language_data.register_data.register}}</button>
+            <a href="/login">{{data.language_data.register_data.login}}</a>
         </form>
     </div>
     

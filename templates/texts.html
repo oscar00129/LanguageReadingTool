@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{data.app_name}}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div id="app">
+        {% with data=data %}
+            {% include "components/banner.html" %}
+        {% endwith %}
+        <div class="p2">
+            <a href="/texts/add"><button class="btn-green">{{data.language_data.list_texts_data.add_text}}</button></a>
+            
+            <h2>{{data.language_data.list_texts_data.your_texts}}</h2>
+            <div class="texts-container">
+                {% if data.texts|length <= 0 %}
+                    <p class="error-message">{{data.language_data.list_texts_data.messages.no_texts}}</p>
+                {% endif %}
+                {% for text in data.texts %}
+                <a href="/texts/{{text.id}}">
+                    <div class="text-info-container">
+                        {% if text.img_src != '' %}
+                            <img src="{{text.img_src}}" alt="{{text.title}}">
+                        {% else %}
+                            <div class="img">?</div>
+                        {% endif %}
+                        <h4>{{text.title}}</h4>
+                        <div class="text-stats">
+                            {{data.language_data.list_texts_data.stats.unknown}}<span class="word-unknown">{{text.stats.unknown}}</span>
+                            {{data.language_data.list_texts_data.stats.learning}}<span class="word-learning">{{text.stats.learning}}</span>
+                            {{data.language_data.list_texts_data.stats.learned}}<span class="word-learned">{{text.stats.learned}}</span>
+                            {{data.language_data.list_texts_data.stats.total}}<span class="word-total">{{text.stats.total}}</span>
+                        </div>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios"></script>
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return { }
+            },
+            methods: { }
+          })
+        
+         app.mount('#app')
+    </script>
+</body>
+</html>

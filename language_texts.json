@@ -3,78 +3,168 @@
         "language": "english",
         "app_name": "Language App",
         "author": "Oscar00129",
-        "login_data": {
-            "email": "Email",
-            "password": "Password",
-            "login": "Login",
-            "register": "Register here",
-            "messages": {
-                "login_success": "Login success.",
-                "error_credentials": "Error in credentials!"
-            }
-        },
-        "register_data": {
-            "email": "Email",
-            "password": "Password",
-            "confirm_password": "Confirm Password",
-            "register": "Register",
-            "login": "Log in here",
-            "messages": {
-                "email_already_registered": "Email is already registered.",
-                "email_registered_successfully": "Email has been registered successfully.",
-                "problem": "There was a problem with request, try again later."
+        "language_data": {
+            "banner_data": {
+                "welcome": "Welcome ",
+                "logout": "Logout"
+            },
+            "login_data": {
+                "email": "Email",
+                "password": "Password",
+                "login": "Login",
+                "register": "Register here",
+                "messages": {
+                    "login_success": "Login success.",
+                    "error_credentials": "Error in credentials!"
+                }
+            },
+            "register_data": {
+                "email": "Email",
+                "password": "Password",
+                "confirm_password": "Confirm Password",
+                "register": "Register",
+                "login": "Log in here",
+                "messages": {
+                    "email_already_registered": "Email is already registered.",
+                    "email_registered_successfully": "Email has been registered successfully.",
+                    "problem": "There was a problem with request, try again later.",
+                    "not_match": "Passwords do not match."
+                }
+            },
+            "list_texts_data": {
+                "add_text": "Add New Text",
+                "your_texts": "Your texts: ",
+                "stats": {
+                    "unknown": "Unknown: ",
+                    "learning": "Learning: ",
+                    "learned": "Learned: ",
+                    "total": "Total: "
+                },
+                "messages": {
+                    "no_texts": "No texts found, please create one!"
+                }
+            },
+            "text_data": {
+                "not_found": "Text not found",
+                "return": "Return",
+                "stats": {
+                    "unknown": "Unknown: ",
+                    "learning": "Learning: ",
+                    "learned": "Learned: ",
+                    "total": "Total: "
+                }
             }
         }
     }, {
         "language": "spanish",
         "app_name": "Aplicación de análisis de texto en japonés",
         "author": "Oscar00129",
-        "login_data": {
-            "email": "Correo Electrónico",
-            "password": "Contraseña",
-            "login": "Iniciar Sesión",
-            "register": "Registrate aquí",
-            "messages": {
-                "login_success": "Inicio de sesión exitoso.",
-                "error_credentials": "Error en las credenciales!"
-            }
-        },
-        "register_data": {
-            "email": "Correo Electrónico",
-            "password": "Contraseña",
-            "confirm_password": "Confirma la Contraseña",
-            "register": "Registrarse",
-            "login": "Inicia sesión aquí",
-            "messages": {
-                "email_already_registered": "El correo electrónico ya está registrado.",
-                "email_registered_successfully": "El correo electrónico ha sido registrado correctamente.",
-                "problem": "Hubo un problema con su solicitud, intente de nuevo más tarde."
+        "language_data": {
+            "banner_data": {
+                "welcome": "Bienvenido ",
+                "logout": "Cerrar sesión"
+            },
+            "login_data": {
+                "email": "Correo Electrónico",
+                "password": "Contraseña",
+                "login": "Iniciar Sesión",
+                "register": "Registrate aquí",
+                "messages": {
+                    "login_success": "Inicio de sesión exitoso.",
+                    "error_credentials": "Error en las credenciales!"
+                }
+            },
+            "register_data": {
+                "email": "Correo Electrónico",
+                "password": "Contraseña",
+                "confirm_password": "Confirma la Contraseña",
+                "register": "Registrarse",
+                "login": "Inicia sesión aquí",
+                "messages": {
+                    "email_already_registered": "El correo electrónico ya está registrado.",
+                    "email_registered_successfully": "El correo electrónico ha sido registrado correctamente.",
+                    "problem": "Hubo un problema con su solicitud, intente de nuevo más tarde.",
+                    "not_match": "Las contraseñas no coinciden."
+                }
+            },
+            "list_texts_data": {
+                "add_text": "Agregar Nuevo Text",
+                "your_texts": "Sus textos: ",
+                "stats": {
+                    "unknown": "Desconocidas: ",
+                    "learning": "Aprendiendo: ",
+                    "learned": "Aprendidas: ",
+                    "total": "Total: "
+                },
+                "messages": {
+                    "no_texts": "No cuentas con textos, por favor crea uno!"
+                }
+            },
+            "text_data": {
+                "not_found": "Texto no encontrado",
+                "return": "Volver",
+                "stats": {
+                    "unknown": "Desconocidas: ",
+                    "learning": "Aprendiendo: ",
+                    "learned": "Aprendidas: ",
+                    "total": "Total: "
+                }
             }
         }
     }, {
         "language": "japanese",
         "app_name": "語学勉強アプリ",
         "author": "Oscar00129",
-        "login_data": {
-            "email": "メールアドレス",
-            "password": "パスワード",
-            "login": "ログイン",
-            "register": "登録ページ",
-            "messages": {
-                "login_success": "ログイン成功",
-                "error_credentials": "パスワードが正しくありません"
-            }
-        },
-        "register_data": {
-            "email": "メールアドレス",
-            "password": "パスワード",
-            "confirm_password": "パスワードもう一度",
-            "register": "登録",
-            "login": "キャンセル",
-            "messages": {
-                "email_already_registered": "メールアドレスは既に登録されています。 ",
-                "email_registered_successfully": "メールアドレスは正常に登録されました。",
-                "problem": "申し訳ありませんが、ご要求に問題が発生しました。後でもう一度お試しください。"
+        "language_data": {
+            "banner_data": {
+                "welcome": "ようこそ ",
+                "logout": "ログアウトします。"
+            },
+            "login_data": {
+                "email": "メールアドレス",
+                "password": "パスワード",
+                "login": "ログイン",
+                "register": "登録ページ",
+                "messages": {
+                    "login_success": "ログイン成功",
+                    "error_credentials": "パスワードが正しくありません"
+                }
+            },
+            "register_data": {
+                "email": "メールアドレス",
+                "password": "パスワード",
+                "confirm_password": "パスワードもう一度",
+                "register": "登録",
+                "login": "キャンセル",
+                "messages": {
+                    "email_already_registered": "メールアドレスは既に登録されています。 ",
+                    "email_registered_successfully": "メールアドレスは正常に登録されました。",
+                    "problem": "申し訳ありませんが、ご要求に問題が発生しました。後でもう一度お試しください。",
+                    "not_match": "パスワードが一致しません。"
+                }
+            },
+            "list_texts_data": {
+                "add_text": "新しいテキストを追加します。",
+                "your_texts": "あなたのテキストは次の通りです: ",
+                "stats": {
+                    "unknown": "不明: ",
+                    "learning": "学習: ",
+                    "learned": "学んだ: ",
+                    "total": "合計: "
+                },
+                "messages": {
+                    "no_texts": "テキストが見つかりませんでした。新しく作成します。"
+                }
+            },
+            "text_data": {
+                "not_found": "テキストが見つかりませんでした。",
+                "return": "戻る",
+                "stats": {
+                    "unknown": "不明: ",
+                    "learning": "学習: ",
+                    "learned": "学んだ: ",
+                    "total": "合計: "
+                }
             }
         }
     }]

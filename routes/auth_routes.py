@@ -1,23 +1,9 @@
 from flask import Blueprint, render_template, request, session, redirect, url_for, jsonify
 import mysql.connector
 from configparser import ConfigParser
-import json
+import json, helpers
 
 auth_bp = Blueprint('auth', __name__)
-
-def readConfig(category, attribute, is_int = False):
-    config = ConfigParser()
-    config.read('config.ini')
-    if is_int:
-        return config.getint(category, attribute)
-    else:
-        return config[category][attribute]
-
-def getLanguageData(language_config):
-    with open('language_texts.json') as json_file:
-        data = json.load(json_file)
-        local_language_data = list(filter(lambda language: language['language'] == language_config, data['languages']))
-        return local_language_data[0] or {}
 
 @auth_bp.route('/login')
 def login():
@@ -25,8 +11,8 @@ def login():
     if logged_user:
         return redirect(url_for('index'))
     else:
-        language = readConfig('APP', 'LANGUAGE')
-        data = getLanguageData(language)
+        language = helpers.readConfig('APP', 'LANGUAGE')
+        data = helpers.getLanguageData(language)
         return render_template('login.html', data = data)
 
 @auth_bp.route('/loginBackend', methods=['POST'])
@@ -35,11 +21,11 @@ def loginBackend():
     txtPass = request.get_json()['txtPass']
 
     cn = mysql.connector.connect(
-        host = readConfig('DATABASE', 'HOST'),
-        port = readConfig('DATABASE', 'PORT', True),
-        user = readConfig('DATABASE', 'USER'),
-        password = readConfig('DATABASE', 'PASSWORD'),
-        database = readConfig('DATABASE', 'DATABASE')
+        host = helpers.readConfig('DATABASE', 'HOST'),
+        port = helpers.readConfig('DATABASE', 'PORT', True),
+        user = helpers.readConfig('DATABASE', 'USER'),
+        password = helpers.readConfig('DATABASE', 'PASSWORD'),
+        database = helpers.readConfig('DATABASE', 'DATABASE')
     )
     cursor = cn.cursor()
     # Consulta segura con parámetros de consulta
@@ -50,13 +36,13 @@ def loginBackend():
     cursor.close()
     cn.close()
 
-    language = readConfig('APP', 'LANGUAGE')
-    data = getLanguageData(language)
+    language = helpers.readConfig('APP', 'LANGUAGE')
+    data = helpers.getLanguageData(language)
     if len(results) > 0:
         session['logged_user'] = txtUser
-        return json.dumps({ 'success': data['login_data']['messages']['login_success'] })
+        return json.dumps({ 'success': data['language_data']['login_data']['messages']['login_success'] })
     else:
-        return json.dumps({ 'error': data['login_data']['messages']['error_credentials'] })
+        return json.dumps({ 'error': data['language_data']['login_data']['messages']['error_credentials'] })
 
 @auth_bp.route('/logout')
 def logout():
@@ -69,8 +55,8 @@ def register():
     if logged_user:
         return redirect(url_for('index'))
     else:
-        language = readConfig('APP', 'LANGUAGE')
-        data = getLanguageData(language)
+        language = helpers.readConfig('APP', 'LANGUAGE')
+        data = helpers.getLanguageData(language)
         return render_template('register.html', data = data)
 
 @auth_bp.route('/registerBackend', methods=['POST'])
@@ -79,11 +65,11 @@ def registerBackend():
     txtPass = request.get_json()['txtPass']
 
     cn = mysql.connector.connect(
-        host = readConfig('DATABASE', 'HOST'),
-        port = readConfig('DATABASE', 'PORT', True),
-        user = readConfig('DATABASE', 'USER'),
-        password = readConfig('DATABASE', 'PASSWORD'),
-        database = readConfig('DATABASE', 'DATABASE')
+        host = helpers.readConfig('DATABASE', 'HOST'),
+        port = helpers.readConfig('DATABASE', 'PORT', True),
+        user = helpers.readConfig('DATABASE', 'USER'),
+        password = helpers.readConfig('DATABASE', 'PASSWORD'),
+        database = helpers.readConfig('DATABASE', 'DATABASE')
     )
     cursor = cn.cursor()
     # Comprobar email unico
@@ -91,10 +77,10 @@ def registerBackend():
     params = (txtUser,)
     cursor.execute(query, params)
     results = cursor.fetchall()
-    language = readConfig('APP', 'LANGUAGE')
-    data = getLanguageData(language)
+    language = helpers.readConfig('APP', 'LANGUAGE')
+    data = helpers.getLanguageData(language)
     if len(results) > 0:
-        return json.dumps({ 'error': data['register_data']['messages']['email_already_registered'] })
+        return json.dumps({ 'error': data['language_data']['register_data']['messages']['email_already_registered'] })
     
     # Registro
     query = "INSERT INTO users (email, password) VALUES (%s, %s);"
@@ -105,9 +91,9 @@ def registerBackend():
         cursor.close()
         cn.close()
         # El registro fue exitoso
-        return json.dumps({ 'success': data['register_data']['messages']['email_registered_successfully'] })
+        return json.dumps({ 'success': data['language_data']['register_data']['messages']['email_registered_successfully'] })
     else:
         cursor.close()
         cn.close()
         # El registro falló
-        return json.dumps({ 'error': data['register_data']['messages']['problem'] })
+        return json.dumps({ 'error': data['language_data']['register_data']['messages']['problem'] })

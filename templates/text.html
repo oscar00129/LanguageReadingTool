@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{data.app_name}}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div id="app">
+        {% with data=data %}
+            {% include "components/banner.html" %}
+        {% endwith %}
+
+        {% if data.text == {} %}
+            <p class="error-message">{{data.language_data.text_data.not_found}}</p>
+            <a href="/texts"><button class="btn-green">{{data.language_data.text_data.return}}</button></a>
+        {% else %}
+            <div class="p2 splitted-container">
+                <div class="p2 text-container">
+                    <p><a href="/texts"><button class="btn-green">{{data.language_data.text_data.return}}</button></a></p>
+                    {% if data.text.img_src != '' %}
+                        <img src="{{data.text.img_src}}" alt="{{data.text.title}}">
+                    {% else %}
+                        <div class="img">?</div>
+                    {% endif %}
+                    <h1>{{data.text.title}}</h1>
+                    <p>{{data.text.text}}</p>
+                </div>
+                <div class="p2 stats-container">
+                    <p>{{data.language_data.text_data.stats.unknown}}<span class="word-unknown">{{data.text.stats.unknown}}</span></p>
+                    <p>{{data.language_data.text_data.stats.learning}}<span class="word-learning">{{data.text.stats.learning}}</span></p>
+                    <p>{{data.language_data.text_data.stats.learned}}<span class="word-learned">{{data.text.stats.learned}}</span></p>
+                    <p>{{data.language_data.text_data.stats.total}}<span class="word-total">{{data.text.stats.total}}</span></p>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+    
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios"></script>
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    text: {}
+                }
+            },
+            methods: {
+            }
+          })
+        
+         app.mount('#app')
+    </script>
+</body>
+</html>

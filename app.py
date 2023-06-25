@@ -2,18 +2,21 @@ from flask import Flask, render_template, request, session, redirect, url_for
 from janome.tokenizer import Tokenizer
 import json, nagisa
 from routes import auth_routes
+from routes import text_routes
+import helpers
 
 app = Flask(__name__)
 app.secret_key = 'secret_key_example_language'
 
 app.register_blueprint(auth_routes.auth_bp)
+app.register_blueprint(text_routes.text_bp)
 
 @app.route('/')
 def index():
     logged_user = session.get('logged_user')
     if logged_user:
-        language = auth_routes.readConfig('APP', 'LANGUAGE')
-        data = auth_routes.getLanguageData(language)
+        language = helpers.readConfig('APP', 'LANGUAGE')
+        data = helpers.getLanguageData(language)
         data['logged_user'] = logged_user
         return render_template('index.html', data=data)
     else:
