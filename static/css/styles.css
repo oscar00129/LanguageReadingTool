@@ -201,3 +201,9 @@ html, body{
     background-color: blueviolet;
     min-width: 10rem
 }
+
+.d-flex{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+}

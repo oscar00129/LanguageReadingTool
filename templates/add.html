@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{data.app_name}}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div id="app">
+        {% with data=data %}
+            {% include "components/banner.html" %}
+        {% endwith %}
+        <div class="p2 d-flex">
+            <p><a href="/texts"><button class="btn-green">{{data.language_data.text_data.return}}</button></a></p>
+            <h2>Add Text</h2>
+            <form class="d-flex" @submit="btnSubmitClick" action="/texts/addTextBackend" method="post">
+                <input type="text" v-model="title" placeholder="{{data.language_data.text_data.messages.title}}" required>
+                <input type="text" v-model="img_src" placeholder="{{data.language_data.text_data.messages.img}}">
+                <textarea id="txtPaste" name="txtPaste" rows="10" cols="50" v-model="text" placeholder="{{data.language_data.text_data.messages.text}}" required></textarea>
+                <button type="submit">{{data.language_data.text_data.messages.submit}}</button>
+                <p class="error-message">{{'{{error}}'}}</p>
+            </form>
+        </div>
+    </div>
+    
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios"></script>
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    title: "",
+                    text: "",
+                    img_src: "",
+                    error: "",
+                    stats: {unknown: 0, learning: 0, learned: 0, total: 0}
+                }
+            },
+            methods: {
+                btnSubmitClick(event){
+                    axios.post("/texts/addTextBackend", {
+                        "title": this.title,
+                        "img_src": this.img_src,
+                        "stats": JSON.stringify(this.stats),
+                        "text": this.text,
+                        "author_id": 5, // TODO: Update author id
+                        "is_public": 0
+                    })
+                    .then(response => {
+                        if(response.data.error){
+                            this.error = response.data.error;
+                        }else if(response.data.success){
+                            alert(response.data.success);
+                            window.location.href = '/texts';
+                        }
+                    })
+                    .catch(error => {
+                        this.error = error;
+                    });
+                    event.preventDefault();
+                }
+            }
+          })
+        
+         app.mount('#app')
+    </script>
+</body>
+</html>

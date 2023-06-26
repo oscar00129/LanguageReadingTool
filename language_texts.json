@@ -52,6 +52,14 @@
                     "learning": "Learning: ",
                     "learned": "Learned: ",
                     "total": "Total: "
+                },
+                "messages": {
+                    "success": "Text submitted!",
+                    "error": "There was a problem with request, try again later.",
+                    "title": "Insert text's title here.",
+                    "img": "Insert an image URL (optional).",
+                    "text": "Insert your text here.",
+                    "submit": "Submit"
                 }
             }
         }
@@ -108,6 +116,14 @@
                     "learning": "Aprendiendo: ",
                     "learned": "Aprendidas: ",
                     "total": "Total: "
+                },
+                "messages": {
+                    "success": "Texto creado!",
+                    "error": "Hubo un problema con su solicitud, intente de nuevo más tarde.",
+                    "title": "Inserte su texto aquí.",
+                    "img": "Inserte la URL de una imagen (opcional).",
+                    "text": "Inserte su texto aquí.",
+                    "submit": "Crear texto"
                 }
             }
         }
@@ -164,6 +180,14 @@
                     "learning": "学習: ",
                     "learned": "学んだ: ",
                     "total": "合計: "
+                },
+                "messages": {
+                    "success": "テキストが作成されました。",
+                    "error": "申し訳ありませんが、ご要求に問題が発生しました。後でもう一度お試しください。",
+                    "title": "ここにテキストのタイトルを挿入してください。",
+                    "img": "画像のURLを挿入してください（任意）。",
+                    "text": "ここにテキストを挿入してください。",
+                    "submit": "提出します。 "
                 }
             }
         }
