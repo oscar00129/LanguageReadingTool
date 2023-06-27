@@ -15,7 +15,7 @@ def get_texts():
         data['logged_user'] = logged_user
 
         # Get logged user texts
-        logged_user_id = 5 # TODO: Change login params, add id
+        logged_user_id = data['logged_user']['id']
         cn = mysql.connector.connect(
             host = helpers.readConfig('DATABASE', 'HOST'),
             port = helpers.readConfig('DATABASE', 'PORT', True),
@@ -43,11 +43,11 @@ def get_texts():
                 'is_public': result[6]
             }
             serializable_results.append(serializable_result)
-        data['texts'] = serializable_results # TODO: divide language json, add a key to languages
+        data['texts'] = serializable_results
         
         return render_template('texts.html', data = data)
     else:
-        return redirect(url_for('login'))
+        return redirect(url_for('auth.login'))
     
 @text_bp.route('/texts/<int:text_id>')
 def get_text(text_id):
@@ -61,7 +61,7 @@ def get_text(text_id):
         data['logged_user'] = logged_user
 
         # Get logged user texts
-        logged_user_id = 5 # TODO: Change login params, add id
+        logged_user_id = data['logged_user']['id']
         cn = mysql.connector.connect(
             host = helpers.readConfig('DATABASE', 'HOST'),
             port = helpers.readConfig('DATABASE', 'PORT', True),
@@ -89,11 +89,11 @@ def get_text(text_id):
                 'author_id': result[5],
                 'is_public': result[6]
             }
-        data['text'] = result # TODO: divide language json, add a key to languages
+        data['text'] = result
         
         return render_template('text.html', data = data)
     else:
-        return redirect(url_for('login'))
+        return redirect(url_for('auth.login'))
 
 @text_bp.route('/texts/add')
 def add_text():
@@ -108,7 +108,7 @@ def add_text():
 
         return render_template('add.html', data = data)
     else:
-        return redirect(url_for('login'))
+        return redirect(url_for('auth.login'))
 
 @text_bp.route('/texts/addTextBackend', methods=['POST'])
 def add_text_backend():

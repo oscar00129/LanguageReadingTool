@@ -42,7 +42,7 @@
                         "img_src": this.img_src,
                         "stats": JSON.stringify(this.stats),
                         "text": this.text,
-                        "author_id": 5, // TODO: Update author id
+                        "author_id": '{{data.logged_user.id}}',
                         "is_public": 0
                     })
                     .then(response => {

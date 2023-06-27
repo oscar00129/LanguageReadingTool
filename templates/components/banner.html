@@ -1,6 +1,6 @@
 <header class="header">
     <h1>{{data.app_name}}</h1>
     {% if data.logged_user %}
-        <p>{{data.language_data.banner_data.welcome}}{{data.logged_user}}! <a href="/logout">{{data.language_data.banner_data.logout}}</a></p>
+        <p>{{data.language_data.banner_data.welcome}}{{data.logged_user.email}}! <a href="/logout">{{data.language_data.banner_data.logout}}</a></p>
     {% endif %}
 </header>

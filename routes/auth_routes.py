@@ -39,7 +39,13 @@ def loginBackend():
     language = helpers.readConfig('APP', 'LANGUAGE')
     data = helpers.getLanguageData(language)
     if len(results) > 0:
-        session['logged_user'] = txtUser
+        logged_user_data = {}
+        for result in results:
+            logged_user_data = {
+                'id': result[0],
+                'email': result[1]
+            }
+        session['logged_user'] = logged_user_data
         return json.dumps({ 'success': data['language_data']['login_data']['messages']['login_success'] })
     else:
         return json.dumps({ 'error': data['language_data']['login_data']['messages']['error_credentials'] })
