@@ -13,9 +13,20 @@ def get_texts():
 
         # Put logged user info
         data['logged_user'] = logged_user
+        
+        return render_template('texts.html', data = data)
+    else:
+        return redirect(url_for('auth.login'))
 
-        # Get logged user texts
-        logged_user_id = data['logged_user']['id']
+@text_bp.route('/texts/getTextsAndWords')
+def get_texts_and_words():
+    logged_user = session.get('logged_user')
+    # Get language data
+    language = helpers.readConfig('APP', 'LANGUAGE')
+    data = helpers.getLanguageData(language)
+    
+    if logged_user:
+        knowed_words = json.loads(get_knowed_words(logged_user))
         cn = mysql.connector.connect(
             host = helpers.readConfig('DATABASE', 'HOST'),
             port = helpers.readConfig('DATABASE', 'PORT', True),
@@ -26,28 +37,27 @@ def get_texts():
         cursor = cn.cursor()
         # Consulta segura con parámetros de consulta
         query = "SELECT * FROM texts WHERE author_id = %s"
-        params = (logged_user_id,)
+        params = (logged_user['id'],)
         cursor.execute(query, params)
         results = cursor.fetchall()
         cursor.close()
         cn.close()
-        serializable_results = []
+
+        readable_results = []
         for result in results:
-            serializable_result = {
+            readable_results.append({
                 'id': result[0],
                 'title': result[1],
                 'img_src': result[2],
                 'stats': json.loads(result[3].decode('utf-8')),
-                'text': result[4],
+                'text': nagisa.tagging(result[4]).words,
                 'author_id': result[5],
                 'is_public': result[6]
-            }
-            serializable_results.append(serializable_result)
-        data['texts'] = serializable_results
-        
-        return render_template('texts.html', data = data)
+            })
+
+        return json.dumps({ 'data': { 'texts': readable_results, 'knowed_words': knowed_words } })
     else:
-        return redirect(url_for('auth.login'))
+        return json.dumps({ 'error': data['language_data']['text_data']['messages']['error'] })
     
 @text_bp.route('/texts/<int:text_id>')
 def get_text(text_id):
