@@ -66,21 +66,6 @@ html, body{
     margin-bottom: 1rem;
 }
 
-.header {
-    background-color: black;
-    color: white;
-    margin: 0;
-    padding: 1rem 2rem 1rem 2rem;
-    margin-bottom: 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.header * {
-    vertical-align: middle;
-}
-
 .btn-green{
     color: white;
     background-color: green;
@@ -185,21 +170,6 @@ html, body{
     background-color: darkslategray;
     color: white;
     border-radius: .2rem;
-}
-
-.splitted-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.text-container {
-    background-color: aquamarine;
-}
-
-.stats-container {
-    background-color: blueviolet;
-    min-width: 10rem
 }
 
 .d-flex{

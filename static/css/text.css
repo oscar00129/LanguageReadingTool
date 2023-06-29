@@ -1,0 +1,35 @@
+.splitted-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+}
+
+.text-container {
+    background-color: white;
+}
+
+.words-container {
+    font-size: larger;
+}
+
+.space{
+    min-width: 1rem;
+    min-height: 1rem;
+}
+
+.unknown {
+    padding: .2rem;
+    border-radius: .2rem;
+    background-color: rgb(236, 179, 167);
+    margin-left: .2rem;
+}
+
+.stats-container {
+    background-color: blueviolet;
+    min-width: 10rem;
+}
+
+.word-status-container {
+    background-color: chocolate;
+    min-width: 10rem;
+}

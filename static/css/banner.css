@@ -1,0 +1,14 @@
+.header {
+    background-color: black;
+    color: white;
+    margin: 0;
+    padding: 1rem 2rem 1rem 2rem;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header * {
+    vertical-align: middle;
+}
