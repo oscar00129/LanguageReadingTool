@@ -1,5 +1,5 @@
-from flask import Blueprint, session, render_template, redirect, url_for, request
-import helpers, mysql.connector, json, nagisa
+from flask import Blueprint, render_template, redirect, url_for, request
+import helpers, json, nagisa
 
 text_bp = Blueprint('text', __name__)
 
